@@ -1,2 +1,16 @@
-package com.example.hotelbooking.service;public interface RoomService {
+package com.example.hotelbooking.service;
+
+import com.example.hotelbooking.entity.Room;
+import com.example.hotelbooking.pojo.RoomPojo;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public interface RoomService {
+    List<Room> getAllRooms();
+    Room getRoomById(Integer id);
+    Room createRoom(RoomPojo roomPojo);
+    Room updateRoom(RoomPojo roomPojo);
+    void deleteRoom(Integer id);
 }

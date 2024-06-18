@@ -1,2 +1,22 @@
-package com.example.hotelbooking.pojo;public class BookingPojo {
+package com.example.hotelbooking.pojo;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+
+public class BookingPojo {
+    private Integer id;
+    private String password;
+    private int customerId;
+    private int roomId;
+
+
+
 }

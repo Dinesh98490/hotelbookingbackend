@@ -1,2 +1,20 @@
-package com.example.hotelbooking.repository;public class BookingRepository {
+package com.example.hotelbooking.repository;
+
+
+import com.example.hotelbooking.Projection.BookingProj;
+import com.example.hotelbooking.entity.Booking;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+
+@Repository
+public interface BookingRepository extends JpaRepository<Booking, Integer> {
+
+
+    @Query(value = "select id from booking",nativeQuery = true)
+    List<BookingProj> findAllByProjection();
+
 }

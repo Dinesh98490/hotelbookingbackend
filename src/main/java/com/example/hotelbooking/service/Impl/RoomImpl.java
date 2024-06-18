@@ -1,2 +1,90 @@
-package com.example.hotelbooking.service.Impl;public class RoomImpl {
+package com.example.hotelbooking.service.impl;
+
+import com.example.hotelbooking.entity.Hotel;
+import com.example.hotelbooking.entity.Room;
+import com.example.hotelbooking.pojo.RoomPojo;
+import com.example.hotelbooking.repository.HotelRepository;
+import com.example.hotelbooking.repository.RoomRepository;
+import com.example.hotelbooking.service.RoomService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+
+@AllArgsConstructor
+public class RoomImpl implements RoomService {
+
+    private final RoomRepository roomRepository;
+    private final HotelRepository hotelRepository;
+
+    @Override
+    public List<Room> getAllRooms() {
+        return roomRepository.findAll();
+    }
+
+    @Override
+    public Room getRoomById(Integer id) {
+        return roomRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Room createRoom(RoomPojo roomPojo) {
+        Room room = new Room();
+        room.setId(roomPojo.getId());
+        room.setRoomNumber(roomPojo.getRoomNumber());
+        room.setRoomType(roomPojo.getRoomType());
+        room.setPricePerNight(roomPojo.getPricePerNight());
+        room.setAvailabilityStatus(roomPojo.getAvailabilityStatus());
+
+
+        // Retrieve the Hotel entity using hotelId
+        Optional<Hotel> optionalHotel = hotelRepository.findById(roomPojo.getHotelId());
+        if (optionalHotel.isPresent()) {
+            Hotel hotel = optionalHotel.get();
+            room.setHotel(hotel);
+        } else {
+            // Handle the case where the hotel is not found
+            throw new RuntimeException("Hotel not found with id: " + roomPojo.getHotelId());
+        }
+
+        return roomRepository.save(room);
+    }
+
+    @Override
+    public Room updateRoom(RoomPojo roomPojo) {
+        Optional<Room> roomOptional = roomRepository.findById(roomPojo.getId());
+        if (roomOptional.isPresent()) {
+            Room room = roomOptional.get();
+            room.setId(roomPojo.getId());
+            room.setRoomNumber(roomPojo.getRoomNumber());
+            room.setRoomType(roomPojo.getRoomType());
+            room.setPricePerNight(roomPojo.getPricePerNight());
+            room.setAvailabilityStatus(roomPojo.getAvailabilityStatus());
+
+
+
+            // Retrieve the Hotel entity using hotelId
+
+            Optional<Hotel> optionalHotel = hotelRepository.findById(roomPojo.getHotelId());
+            if (optionalHotel.isPresent()) {
+                Hotel hotel = optionalHotel.get();
+                room.setHotel(hotel);
+            } else {
+                // Handle the case where the hotel is not found
+
+
+                throw new RuntimeException("Hotel not found with id: " + roomPojo.getHotelId());
+            }
+
+            return roomRepository.save(room);
+        }
+        return null;
+    }
+
+    @Override
+    public void deleteRoom(Integer id) {
+        roomRepository.deleteById(id);
+    }
 }
