@@ -17,7 +17,7 @@ public class HotelPojo {
     private  String hotelAddress;
     private  String hotelCity;
     private  String hotelEmail;
-    private int phoneNumber;
+    private int  phoneNumber;
 
 
 

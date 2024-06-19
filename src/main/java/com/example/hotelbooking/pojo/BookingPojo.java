@@ -13,7 +13,6 @@ import lombok.Setter;
 
 public class BookingPojo {
     private Integer id;
-    private String password;
     private int customerId;
     private int roomId;
 

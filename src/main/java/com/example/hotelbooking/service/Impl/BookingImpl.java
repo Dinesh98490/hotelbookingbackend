@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @Service
 @RequiredArgsConstructor
 public class BookingImpl implements BookingService {
@@ -23,9 +25,9 @@ public class BookingImpl implements BookingService {
     private final RoomRepository roomRepository;
 
     @Override
-    public List<BookingProj> getAllBookings()
+    public List<Booking> getAllBookings()
     {
-        return bookingRepository.findAllByProjection();
+        return bookingRepository.findAll();
     }
 
     @Override
@@ -48,7 +50,7 @@ public class BookingImpl implements BookingService {
         return bookingRepository.save(booking);
     }
     @Override
-    public Booking updateBooking(Integer id,BookingPojo bookingPojo){
+    public Booking updateBooking(BookingPojo bookingPojo){
         Optional<Booking> optionalBooking = bookingRepository.findById(id);
         if(optionalBooking.isPresent()){
             Booking booking = optionalBooking.get();

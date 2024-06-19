@@ -9,10 +9,10 @@ import java.util.List;
 
 
 public interface BookingService {
-    List<BookingProj> getAllBookings();
+    List<Booking> getAllBookings();
     Booking getBookingById(Integer id);
     Booking createBooking(BookingPojo bookingPojo);
-    Booking updateBooking(Integer id,BookingPojo bookingPojo);
+    Booking updateBooking(BookingPojo bookingPojo);
     void deleteBooking(Integer id);
 
 

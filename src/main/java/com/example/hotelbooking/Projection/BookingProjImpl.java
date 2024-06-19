@@ -8,12 +8,7 @@ public class BookingProjImpl implements BookingProj {
     private Integer customerId;
     private Integer roomId;
 
-//    // Constructor to initialize fields
-//    public BookingProjImpl(Integer id, Integer customerId, Integer roomId) {
-//        this.id = id;
-//        this.customerId = customerId;
-//        this.roomId = roomId;
-//    }
+
 
     @Override
     public Integer getID() {

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+
 public interface PaymentService {
     List<Payment> findAll();
     Payment findById(Integer id);

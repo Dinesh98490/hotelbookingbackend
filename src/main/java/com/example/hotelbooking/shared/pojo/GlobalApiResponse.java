@@ -15,6 +15,7 @@ import java.util.List;
 
 public class GlobalApiResponse<T> {
     private String message;
-    private T data;
     private int statusCode;
+    private T data;
+
 }
