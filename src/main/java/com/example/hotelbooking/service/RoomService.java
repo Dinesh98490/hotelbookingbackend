@@ -11,6 +11,6 @@ public interface RoomService {
     List<Room> getAllRooms();
     Room getRoomById(Integer id);
     Room createRoom(RoomPojo roomPojo);
-    Room updateRoom(RoomPojo roomPojo);
+    Room updateRoom(RoomPojo roomPojo, Integer id);
     void deleteRoom(Integer id);
 }

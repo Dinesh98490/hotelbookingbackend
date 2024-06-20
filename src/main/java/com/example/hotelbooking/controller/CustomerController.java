@@ -26,7 +26,7 @@ public class CustomerController {
         return ResponseEntity.ok(globalApiResponse);
     }
 
-    @GetMapping("{/id}")
+    @GetMapping("/{id}")
     public ResponseEntity<GlobalApiResponse<Customer>> getCustomerById(@PathVariable Integer id)
     {
         Customer customer = customerService.getCustomer(id);
@@ -45,15 +45,15 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<GlobalApiResponse<Void>> deleteCustomer(@RequestParam Integer id) {
+    public ResponseEntity<GlobalApiResponse<Void>> deleteCustomer(@PathVariable Integer id) {
         customerService.deleteCustomer(id);
         GlobalApiResponse<Void>  globalApiResponse = new GlobalApiResponse<>("data  deleted successfully",201,null);
         return ResponseEntity.ok(globalApiResponse);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<GlobalApiResponse<Customer>> updateCustomer(@RequestBody CustomerPojo id){
-        Customer customer = customerService.updateCustomer(id);
+    public ResponseEntity<GlobalApiResponse<Customer>> updateCustomer(@RequestBody CustomerPojo customerPojo, @PathVariable Integer id){
+        Customer customer = customerService.updateCustomer(customerPojo,id);
         GlobalApiResponse<Customer>  globalApiResponse = new GlobalApiResponse<>("data  updated successfully",201,customer);
         return ResponseEntity.ok(globalApiResponse);
 

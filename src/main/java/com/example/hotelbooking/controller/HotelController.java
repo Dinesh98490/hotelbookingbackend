@@ -39,7 +39,7 @@ public class HotelController {
 
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<GlobalApiResponse<Void>> deleteHotel(@RequestParam Integer id) {
+    public ResponseEntity<GlobalApiResponse<Void>> deleteHotel(@PathVariable Integer id) {
         hotelService.deleteHotel(id);
         GlobalApiResponse<Void> globalApiResponse = new GlobalApiResponse<>("data deleted sucessfully",201,null);
         return ResponseEntity.ok(globalApiResponse);

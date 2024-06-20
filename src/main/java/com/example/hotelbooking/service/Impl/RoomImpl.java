@@ -53,8 +53,8 @@ public class RoomImpl implements RoomService {
     }
 
     @Override
-    public Room updateRoom(RoomPojo roomPojo) {
-        Optional<Room> roomOptional = roomRepository.findById(roomPojo.getId());
+    public Room updateRoom(RoomPojo roomPojo, Integer id) {
+        Optional<Room> roomOptional = roomRepository.findById(id);
         if (roomOptional.isPresent()) {
             Room room = roomOptional.get();
             room.setId(roomPojo.getId());

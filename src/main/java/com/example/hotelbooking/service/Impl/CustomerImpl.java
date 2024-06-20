@@ -39,8 +39,8 @@ public class CustomerImpl implements CustomerService {
     }
 
     @Override
-    public Customer updateCustomer( CustomerPojo customerPojo) {
-        Optional<Customer> optionalCustomer = customerRepository.findById(customerPojo.getId());
+    public Customer updateCustomer( CustomerPojo customerPojo,Integer id) {
+        Optional<Customer> optionalCustomer = customerRepository.findById(id);
         if (optionalCustomer.isPresent()) {
             Customer customer = optionalCustomer.get();
             customer.setFirstName(customerPojo.getFirstName());

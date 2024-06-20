@@ -19,6 +19,7 @@ import java.util.List;
 @RequestMapping("booking")
 public class BookingController {
     private final BookingService bookingService;
+    @GetMapping
 
     public ResponseEntity<GlobalApiResponse<List<Booking>>> getAllBookings() {
         List<Booking> bookings = bookingService.getAllBookings();
@@ -44,7 +45,7 @@ public class BookingController {
  }
 
  @DeleteMapping("/{id}")
-    public ResponseEntity<GlobalApiResponse<Void>> deleteBooking(@RequestBody Integer id) {
+    public ResponseEntity<GlobalApiResponse<Void>> deleteBooking(@PathVariable Integer id) {
         bookingService.deleteBooking(id);
 
      GlobalApiResponse <Void> globalApiResponse = new GlobalApiResponse<>("data deleted successfully", 200, null);

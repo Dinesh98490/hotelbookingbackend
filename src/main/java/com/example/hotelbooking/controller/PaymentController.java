@@ -44,7 +44,7 @@ public class PaymentController {
 
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<GlobalApiResponse<Void>> deleteById(@RequestBody Integer id){
+    public ResponseEntity<GlobalApiResponse<Void>> deleteById(@PathVariable Integer id){
 
         paymentService.deleteById(id);
         GlobalApiResponse <Void> globalApiResponse = new GlobalApiResponse<>("data deleted successfully", 201, null);
