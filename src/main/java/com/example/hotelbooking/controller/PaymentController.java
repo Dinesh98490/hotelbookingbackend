@@ -26,7 +26,7 @@ public class PaymentController {
 
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<GlobalApiResponse<Payment>>  findById(@RequestPart Integer id){
         Payment payments = paymentService.findById(id);
 
@@ -43,7 +43,7 @@ public class PaymentController {
         return ResponseEntity.ok(globalApiResponse);
 
     }
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<GlobalApiResponse<Void>> deleteById(@RequestBody Integer id){
 
         paymentService.deleteById(id);
@@ -52,7 +52,7 @@ public class PaymentController {
 
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<GlobalApiResponse<Payment>>update (@RequestBody PaymentPojo payment){
         Payment payments = paymentService.update(payment);
 

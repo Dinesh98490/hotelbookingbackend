@@ -24,7 +24,7 @@ public class RoomController {
 
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<GlobalApiResponse<Room>> getRoomById(@RequestParam Integer id) {
         Room rooms = roomService.getRoomById(id);
         GlobalApiResponse<Room>  globalApiResponse = new GlobalApiResponse<>("data retrived successfully",  200, rooms);
@@ -37,7 +37,7 @@ public class RoomController {
         return ResponseEntity.ok(globalApiResponse);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<GlobalApiResponse<Void>> deleteRoom(@RequestParam Integer id) {
         roomService.deleteRoom(id);
         GlobalApiResponse<Void>  globalApiResponse = new GlobalApiResponse<>("data deleted successfully",  201, null);
@@ -45,7 +45,7 @@ public class RoomController {
 
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<GlobalApiResponse<Room>> updateRoom(@RequestBody RoomPojo room) {
         Room rooms = roomService.updateRoom(room);
         GlobalApiResponse<Room>  globalApiResponse = new GlobalApiResponse<>("data updated successfully",  201, rooms);

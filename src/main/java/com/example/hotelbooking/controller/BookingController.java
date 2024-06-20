@@ -26,7 +26,7 @@ public class BookingController {
         return  ResponseEntity.ok(globalApiResponse);
  }
 
- @GetMapping("/id")
+ @GetMapping("/{id}")
     public ResponseEntity<GlobalApiResponse<Booking>> getBookingById(@RequestParam Integer id) {
         Booking bookings = bookingService.getBookingById(id);
 
@@ -43,7 +43,7 @@ public class BookingController {
 
  }
 
- @DeleteMapping
+ @DeleteMapping("/{id}")
     public ResponseEntity<GlobalApiResponse<Void>> deleteBooking(@RequestBody Integer id) {
         bookingService.deleteBooking(id);
 
@@ -52,7 +52,7 @@ public class BookingController {
 
  }
 
- @PutMapping
+ @PutMapping("/{id}")
     public ResponseEntity<GlobalApiResponse<Booking>> updateBooking(@RequestBody BookingPojo booking) {
         Booking bookings = bookingService.updateBooking(booking);
 

@@ -22,9 +22,9 @@ public class HotelImpl implements HotelService {
     }
 
     @Override
-    public Hotel getHotelById(Integer id) {
-        Optional<Hotel> optionalHotel = hotelRepository.findById(id);
-        return optionalHotel.orElse(null);
+    public Optional<Hotel> getHotelById(Integer id) {
+//        Optional<Hotel> optionalHotel = ;
+        return hotelRepository.findById(id);
     }
 
     @Override
@@ -41,8 +41,8 @@ public class HotelImpl implements HotelService {
     }
 
     @Override
-    public Hotel updateHotel(HotelPojo hotelPojo) {
-        Optional<Hotel> optionalHotel = hotelRepository.findById(hotelPojo.getHotelId());
+    public Hotel updateHotel(HotelPojo hotelPojo, Integer id) {
+        Optional<Hotel> optionalHotel = hotelRepository.findById(id);
         if (optionalHotel.isPresent()) {
             Hotel hotel = optionalHotel.get();
             hotel.setHotelName(hotelPojo.getHotelName());

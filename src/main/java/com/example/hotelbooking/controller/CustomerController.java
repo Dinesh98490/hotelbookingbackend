@@ -26,8 +26,8 @@ public class CustomerController {
         return ResponseEntity.ok(globalApiResponse);
     }
 
-    @GetMapping("/id")
-    public ResponseEntity<GlobalApiResponse<Customer>> getCustomerById(@RequestParam Integer id)
+    @GetMapping("{/id}")
+    public ResponseEntity<GlobalApiResponse<Customer>> getCustomerById(@PathVariable Integer id)
     {
         Customer customer = customerService.getCustomer(id);
         GlobalApiResponse<Customer>  globalApiResponse = new GlobalApiResponse<>("data  retrieved successfully",200,customer);
@@ -36,7 +36,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<GlobalApiResponse<Customer>> saveCustomer(@RequestParam CustomerPojo id){
+    public ResponseEntity<GlobalApiResponse<Customer>> saveCustomer(@RequestBody CustomerPojo id){
 
         Customer customer = customerService.saveCustomer(id);
         GlobalApiResponse<Customer>  globalApiResponse = new GlobalApiResponse<>("data  created  successfully",201,customer);
@@ -44,15 +44,15 @@ public class CustomerController {
 
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<GlobalApiResponse<Void>> deleteCustomer(@RequestParam Integer id) {
         customerService.deleteCustomer(id);
         GlobalApiResponse<Void>  globalApiResponse = new GlobalApiResponse<>("data  deleted successfully",201,null);
         return ResponseEntity.ok(globalApiResponse);
     }
 
-    @PutMapping
-    public ResponseEntity<GlobalApiResponse<Customer>> updateCustomer(@RequestParam CustomerPojo id){
+    @PutMapping("/{id}")
+    public ResponseEntity<GlobalApiResponse<Customer>> updateCustomer(@RequestBody CustomerPojo id){
         Customer customer = customerService.updateCustomer(id);
         GlobalApiResponse<Customer>  globalApiResponse = new GlobalApiResponse<>("data  updated successfully",201,customer);
         return ResponseEntity.ok(globalApiResponse);
