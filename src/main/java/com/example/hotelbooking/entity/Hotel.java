@@ -31,8 +31,8 @@ public class Hotel {
     private String city;
 
     @Column(name = "phoneNumber", nullable = false, length = 10)
-    private int phoneNumber;
+    private long phoneNumber;
 
-    @Column(unique = true, nullable = false, length = 20)
+    @Column(unique = true, nullable = false, length = 100)
     private String email;
 }

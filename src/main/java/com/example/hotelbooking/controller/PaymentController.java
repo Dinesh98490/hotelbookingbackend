@@ -27,7 +27,7 @@ public class PaymentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GlobalApiResponse<Payment>>  findById(@RequestPart Integer id){
+    public ResponseEntity<GlobalApiResponse<Payment>>  findById(@PathVariable Integer id){
         Payment payments = paymentService.findById(id);
 
         GlobalApiResponse <Payment> globalApiResponse = new GlobalApiResponse<>("data retrived successfully", 200, payments);

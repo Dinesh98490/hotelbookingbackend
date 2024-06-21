@@ -30,7 +30,7 @@ public class Room {
     @Column(name = "availabilityStatus", nullable = false, length = 100)
     private String availabilityStatus;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hotel_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_hotel_room"))
     private Hotel hotel;
 }
