@@ -28,7 +28,7 @@ public class BookingController {
  }
 
  @GetMapping("/{id}")
-    public ResponseEntity<GlobalApiResponse<Booking>> getBookingById(@RequestParam Integer id) {
+    public ResponseEntity<GlobalApiResponse<Booking>> getBookingById(@PathVariable Integer id) {
         Booking bookings = bookingService.getBookingById(id);
 
      GlobalApiResponse <Booking> globalApiResponse = new GlobalApiResponse<>("data retrived successfully", 200, bookings);
@@ -54,7 +54,7 @@ public class BookingController {
  }
 
  @PutMapping("/{id}")
-    public ResponseEntity<GlobalApiResponse<Booking>> updateBooking(@RequestBody BookingPojo booking) {
+    public ResponseEntity<GlobalApiResponse<Booking>> updateBooking(@PathVariable BookingPojo booking) {
         Booking bookings = bookingService.updateBooking(booking);
 
      GlobalApiResponse <Booking> globalApiResponse = new GlobalApiResponse<>("data updated successfully", 200, bookings);

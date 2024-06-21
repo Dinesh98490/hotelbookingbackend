@@ -53,7 +53,7 @@ public class PaymentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<GlobalApiResponse<Payment>>update (@RequestBody PaymentPojo payment){
+    public ResponseEntity<GlobalApiResponse<Payment>>update (@PathVariable PaymentPojo payment){
         Payment payments = paymentService.update(payment);
 
         GlobalApiResponse <Payment> globalApiResponse = new GlobalApiResponse<>("data updated  successfully", 201, null);
