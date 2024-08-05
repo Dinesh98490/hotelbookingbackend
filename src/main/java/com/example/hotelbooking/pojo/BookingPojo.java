@@ -13,6 +13,9 @@ import lombok.Setter;
 
 public class BookingPojo {
     private Integer id;
+    private String firstname;
+    private String lastname;
+    private String address;
     private int customerId;
     private int roomId;
 

@@ -18,12 +18,22 @@ public class Booking {
     @SequenceGenerator(name = "booking_setup_seq_gen", sequenceName = "booking_setup_seq", allocationSize = 1)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "firstName", nullable = false, length = 100)
+    private String firstName;
+
+    @Column(name = "lastName", nullable = false, length = 100)
+    private String lastName;
+
+    @Column(name = "address", nullable = false, length = 100)
+    private String address;
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", referencedColumnName = "id",
             foreignKey = @ForeignKey(name = "pk_id_fk_customer_id"))
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "room_id", referencedColumnName = "id",
             foreignKey = @ForeignKey(name = "pk_id_fk_room_id"))
     private Room room;

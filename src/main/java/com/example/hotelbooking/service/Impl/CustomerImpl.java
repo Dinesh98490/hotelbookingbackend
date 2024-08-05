@@ -28,19 +28,20 @@ public class CustomerImpl implements CustomerService {
 
     @Override
     public Customer saveCustomer(CustomerPojo customerPojo) {
+        System.out.println(customerPojo);
         Customer customer = new Customer();
         customer.setFirstName(customerPojo.getFirstName());
         customer.setLastName(customerPojo.getLastName());
         customer.setEmail(customerPojo.getEmail());
         customer.setPhoneNumber(customerPojo.getPhoneNumber());
         customer.setAddress(customerPojo.getAddress());
-        customer.setCitizenshipNo(customerPojo.getCitizenShipNo());
+        customer.setCitizenshipno(customerPojo.getCitizenshipNo());
         return customerRepository.save(customer);
     }
 
     @Override
     public Customer updateCustomer( CustomerPojo customerPojo,Integer id) {
-        Optional<Customer> optionalCustomer = customerRepository.findById(id);
+        Optional<Customer> optionalCustomer = customerRepository.findById(customerPojo.getId());
         if (optionalCustomer.isPresent()) {
             Customer customer = optionalCustomer.get();
             customer.setFirstName(customerPojo.getFirstName());
@@ -48,7 +49,7 @@ public class CustomerImpl implements CustomerService {
             customer.setEmail(customerPojo.getEmail());
             customer.setPhoneNumber(customerPojo.getPhoneNumber());
             customer.setAddress(customerPojo.getAddress());
-            customer.setCitizenshipNo(customerPojo.getCitizenShipNo());
+            customer.setCitizenshipno(customerPojo.getCitizenshipNo());
             return customerRepository.save(customer);
         }
         return null;

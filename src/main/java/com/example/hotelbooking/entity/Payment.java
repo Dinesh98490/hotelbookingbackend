@@ -25,7 +25,7 @@ public class Payment {
     private Date paymentDate;
 
     @Column(name = "amount", nullable = false, length = 100)
-    private Integer amount;
+    private String amount;
 
     @Column(name = "paymentMethod", nullable = false, length = 100)
     private String paymentMethod;

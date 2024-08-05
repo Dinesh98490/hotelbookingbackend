@@ -16,5 +16,5 @@ public class CustomerPojo {
     private String address;
     private String phoneNumber;
     private String email;
-    private int citizenShipNo;
+    private String citizenshipNo;
 }

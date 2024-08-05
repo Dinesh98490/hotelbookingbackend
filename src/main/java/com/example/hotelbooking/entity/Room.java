@@ -18,19 +18,19 @@ public class Room {
     @SequenceGenerator(name = "room_setup_seq_gen", sequenceName = "room_setup_seq", allocationSize = 1)
     private Integer id;
 
-    @Column(name = "roomNumber", nullable = false, length = 10)
-    private Integer roomNumber;
+    @Column( nullable = false, length = 10)
+    private String roomfloor;
 
-    @Column(name = "roomType", nullable = false, length = 100)
-    private String roomType;
+    @Column( nullable = false, length = 100)
+    private String roomtype;
 
-    @Column(name = "pricePerNight", nullable = false, length = 10)
-    private Integer pricePerNight;
+    @Column( nullable = false, length = 10)
+    private String pricepernight;
 
-    @Column(name = "availabilityStatus", nullable = false, length = 100)
-    private String availabilityStatus;
+    @Column( nullable = false, length = 100)
+    private String availabilitystatus;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hotel_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_hotel_room"))
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "hotelid", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_hotel_room"))
     private Hotel hotel;
 }

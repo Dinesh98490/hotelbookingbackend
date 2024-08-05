@@ -12,9 +12,9 @@ import lombok.Setter;
 
 public class RoomPojo {
     private Integer id;
-    private int roomNumber;
+    private String roomNumber;
     private String roomType;
-    private int pricePerNight;
+    private String pricePerNight;
     private String availabilityStatus;
-    private int hotelId;
+    private Integer hotelId=1;
 }

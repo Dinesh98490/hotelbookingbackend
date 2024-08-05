@@ -9,6 +9,7 @@ import com.example.hotelbooking.service.PaymentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +35,7 @@ public class PaymentImpl implements PaymentService {
     public Payment save(PaymentPojo paymentPojo) {
         Payment payment = new Payment();
         payment.setAmount(paymentPojo.getAmount());
-        payment.setPaymentDate(paymentPojo.getPaymentDate());
+        payment.setPaymentDate(new Date());
         payment.setPaymentMethod(paymentPojo.getPaymentMethod());
 
         Optional<Booking> optionalBooking = bookingRepository.findById(paymentPojo.getBookingId());
@@ -52,7 +53,7 @@ public class PaymentImpl implements PaymentService {
         if (optionalPayment.isPresent()) {
             Payment payment = optionalPayment.get();
             payment.setAmount(paymentPojo.getAmount());
-            payment.setPaymentDate(paymentPojo.getPaymentDate());
+            payment.setPaymentDate(new Date());
             payment.setPaymentMethod(paymentPojo.getPaymentMethod());
 
             Optional<Booking> optionalBooking = bookingRepository.findById(paymentPojo.getBookingId());

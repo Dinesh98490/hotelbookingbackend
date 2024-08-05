@@ -1,4 +1,4 @@
-package com.example.hotelbooking.service.impl;
+package com.example.hotelbooking.service.Impl;
 
 import com.example.hotelbooking.entity.Hotel;
 import com.example.hotelbooking.entity.Room;
@@ -33,13 +33,11 @@ public class RoomImpl implements RoomService {
     public Room createRoom(RoomPojo roomPojo) {
         Room room = new Room();
         room.setId(roomPojo.getId());
-        room.setRoomNumber(roomPojo.getRoomNumber());
-        room.setRoomType(roomPojo.getRoomType());
-        room.setPricePerNight(roomPojo.getPricePerNight());
-        room.setAvailabilityStatus(roomPojo.getAvailabilityStatus());
-
-
-        // Retrieve the Hotel entity using hotelId
+//        room.setRoomNumber(roomPojo.getRoomNumber());
+        room.setRoomfloor(roomPojo.getRoomNumber());
+        room.setRoomtype(roomPojo.getRoomType());
+        room.setPricepernight(roomPojo.getPricePerNight());
+        room.setAvailabilitystatus(roomPojo.getAvailabilityStatus());
         Optional<Hotel> optionalHotel = hotelRepository.findById(roomPojo.getHotelId());
         if (optionalHotel.isPresent()) {
             Hotel hotel = optionalHotel.get();
@@ -57,26 +55,19 @@ public class RoomImpl implements RoomService {
         Optional<Room> roomOptional = roomRepository.findById(id);
         if (roomOptional.isPresent()) {
             Room room = roomOptional.get();
-            room.setId(roomPojo.getId());
-            room.setRoomNumber(roomPojo.getRoomNumber());
-            room.setRoomType(roomPojo.getRoomType());
-            room.setPricePerNight(roomPojo.getPricePerNight());
-            room.setAvailabilityStatus(roomPojo.getAvailabilityStatus());
 
-
-
-            // Retrieve the Hotel entity using hotelId
-
+            room.setRoomfloor(roomPojo.getRoomNumber());
+//            room.setRoomNumber(roomPojo.getRoomNumber());
+            room.setRoomtype(roomPojo.getRoomType());
+            room.setPricepernight(roomPojo.getPricePerNight());
+            room.setAvailabilitystatus(roomPojo.getAvailabilityStatus());
             Optional<Hotel> optionalHotel = hotelRepository.findById(roomPojo.getHotelId());
             if (optionalHotel.isPresent()) {
                 Hotel hotel = optionalHotel.get();
                 room.setHotel(hotel);
-            } else {
-                // Handle the case where the hotel is not found
-
-
-                throw new RuntimeException("Hotel not found with id: " + roomPojo.getHotelId());
             }
+
+
 
             return roomRepository.save(room);
         }
