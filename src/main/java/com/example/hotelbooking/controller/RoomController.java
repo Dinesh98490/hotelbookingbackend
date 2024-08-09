@@ -32,7 +32,7 @@ public class RoomController {
     }
     @PostMapping
     public ResponseEntity<GlobalApiResponse<Room>> createRoom(@RequestBody RoomPojo room) {
-      Room rooms = roomService.createRoom(room);
+        Room rooms = roomService.createRoom(room);
         GlobalApiResponse<Room>  globalApiResponse = new GlobalApiResponse<>("data created successfully",  201, rooms);
         return ResponseEntity.ok(globalApiResponse);
     }

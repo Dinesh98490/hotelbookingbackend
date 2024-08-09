@@ -30,6 +30,12 @@ public class Payment {
     @Column(name = "paymentMethod", nullable = false, length = 100)
     private String paymentMethod;
 
+    @Column(name = "firstName", nullable = false, length = 100)
+    private String firstName;
+
+    @Column(name = "lastName", nullable = false, length = 100)
+    private String lastName;
+
     @OneToOne
     @JoinColumn(name = "booking_id", referencedColumnName = "id")
     private Booking booking;

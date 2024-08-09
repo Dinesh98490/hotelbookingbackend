@@ -1,6 +1,5 @@
 package com.example.hotelbooking.service.Impl;
 
-import com.example.hotelbooking.Projection.BookingProj;
 import com.example.hotelbooking.entity.Booking;
 import com.example.hotelbooking.entity.Customer;
 import com.example.hotelbooking.entity.Room;
@@ -18,6 +17,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class BookingImpl implements BookingService {
+
     private final BookingRepository bookingRepository;
     private final CustomerRepository customerRepository;
     private final RoomRepository roomRepository;
@@ -36,33 +36,37 @@ public class BookingImpl implements BookingService {
     public Booking createBooking(BookingPojo bookingPojo) {
         Booking booking = new Booking();
         Optional<Customer> optionalCustomer = customerRepository.findById(bookingPojo.getCustomerId());
-        if (optionalCustomer.isPresent()) {
-            Customer customer = optionalCustomer.get();
-            booking.setCustomer(customer);
-        }
+        optionalCustomer.ifPresent(booking::setCustomer);
+
         Optional<Room> optionalRoom = roomRepository.findById(bookingPojo.getRoomId());
-        if (optionalRoom.isPresent()) {
-            Room room = optionalRoom.get();
-            booking.setRoom(room);
-        }
+        optionalRoom.ifPresent(booking::setRoom);
+
+        booking.setFirstname(bookingPojo.getFirstname());
+        booking.setLastname(bookingPojo.getLastname());
+        booking.setAddress(bookingPojo.getAddress());
+        booking.setGender(bookingPojo.getGender());
+        booking.setNationality(bookingPojo.getNationality());
+
         return bookingRepository.save(booking);
     }
 
     @Override
-    public Booking updateBooking(BookingPojo bookingPojo) {
-        Optional<Booking> optionalBooking = bookingRepository.findById(bookingPojo.getId());
+    public Booking updateBooking(Integer id, BookingPojo bookingPojo) {
+        Optional<Booking> optionalBooking = bookingRepository.findById(id);
         if (optionalBooking.isPresent()) {
             Booking booking = optionalBooking.get();
             Optional<Customer> optionalCustomer = customerRepository.findById(bookingPojo.getCustomerId());
-            if (optionalCustomer.isPresent()) {
-                Customer customer = optionalCustomer.get();
-                booking.setCustomer(customer);
-            }
+            optionalCustomer.ifPresent(booking::setCustomer);
+
             Optional<Room> optionalRoom = roomRepository.findById(bookingPojo.getRoomId());
-            if (optionalRoom.isPresent()) {
-                Room room = optionalRoom.get();
-                booking.setRoom(room);
-            }
+            optionalRoom.ifPresent(booking::setRoom);
+
+            booking.setFirstname(bookingPojo.getFirstname());
+            booking.setLastname(bookingPojo.getLastname());
+            booking.setAddress(bookingPojo.getAddress());
+            booking.setGender(bookingPojo.getGender());
+            booking.setNationality(bookingPojo.getNationality());
+
             return bookingRepository.save(booking);
         }
         return null;

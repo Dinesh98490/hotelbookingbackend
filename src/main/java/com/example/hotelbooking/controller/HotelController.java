@@ -1,6 +1,5 @@
 package com.example.hotelbooking.controller;
 
-
 import com.example.hotelbooking.entity.Hotel;
 import com.example.hotelbooking.pojo.HotelPojo;
 import com.example.hotelbooking.service.HotelService;
@@ -17,41 +16,55 @@ import java.util.Optional;
 @AllArgsConstructor
 public class HotelController {
     private final HotelService hotelService;
+
     @GetMapping
     public ResponseEntity<GlobalApiResponse<List<Hotel>>> getAllHotels() {
         List<Hotel> hotels = hotelService.getAllHotels();
-        GlobalApiResponse<List<Hotel>> globalApiResponse = new GlobalApiResponse<>("data  retrived successfully",200,hotels);
+        GlobalApiResponse<List<Hotel>> globalApiResponse = new GlobalApiResponse<>("Data retrieved successfully", 200, hotels);
         return ResponseEntity.ok(globalApiResponse);
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<GlobalApiResponse<Optional<Hotel>>> getHotelById(@PathVariable Integer id) {
-         Optional<Hotel> hotels = hotelService.getHotelById(id);
-        GlobalApiResponse<Optional<Hotel>> globalApiResponse = new GlobalApiResponse<>("data reterived successfully",200,hotels);
-        return ResponseEntity.ok(globalApiResponse);
+    public ResponseEntity<GlobalApiResponse<Hotel>> getHotelById(@PathVariable Integer id) {
+        Optional<Hotel> hotel = hotelService.getHotelById(id);
+        if (hotel.isPresent()) {
+            GlobalApiResponse<Hotel> globalApiResponse = new GlobalApiResponse<>("Data retrieved successfully", 200, hotel.get());
+            return ResponseEntity.ok(globalApiResponse);
+        } else {
+            return ResponseEntity.status(404).body(new GlobalApiResponse<>("Hotel not found", 404, null));
+        }
     }
 
     @PostMapping
-    public ResponseEntity<GlobalApiResponse<Hotel>> createHotel(@RequestBody HotelPojo hotel) {
-        Hotel hotels = hotelService.createHotel(hotel);
-        GlobalApiResponse<Hotel> globalApiResponse = new GlobalApiResponse<>("data created sucessfully",201,hotels);
-        return ResponseEntity.ok(globalApiResponse);
-
-
+    public ResponseEntity<GlobalApiResponse<Hotel>> createHotel(@RequestBody HotelPojo hotelPojo) {
+        try {
+            Hotel hotel = hotelService.createHotel(hotelPojo);
+            GlobalApiResponse<Hotel> globalApiResponse = new GlobalApiResponse<>("Data created successfully", 201, hotel);
+            return ResponseEntity.status(201).body(globalApiResponse);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(new GlobalApiResponse<>(e.getMessage(), 400, null));
+        }
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<GlobalApiResponse<Void>> deleteHotel(@PathVariable Integer id) {
-        hotelService.deleteHotel(id);
-        GlobalApiResponse<Void> globalApiResponse = new GlobalApiResponse<>("data deleted sucessfully",201,null);
-        return ResponseEntity.ok(globalApiResponse);
-
+        try {
+            hotelService.deleteHotel(id);
+            GlobalApiResponse<Void> globalApiResponse = new GlobalApiResponse<>("Data deleted successfully", 200, null);
+            return ResponseEntity.ok(globalApiResponse);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(404).body(new GlobalApiResponse<>(e.getMessage(), 404, null));
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<GlobalApiResponse<Hotel>> updateHotel(@RequestBody HotelPojo hotel,@PathVariable Integer id) {
-        Hotel hotels = hotelService.updateHotel(hotel,id);
-        GlobalApiResponse<Hotel> globalApiResponse = new GlobalApiResponse<>("data updated successfully",201,hotels);
-        return ResponseEntity.ok(globalApiResponse);
-
+    public ResponseEntity<GlobalApiResponse<Hotel>> updateHotel(@RequestBody HotelPojo hotelPojo, @PathVariable Integer id) {
+        try {
+            Hotel hotel = hotelService.updateHotel(hotelPojo, id);
+            GlobalApiResponse<Hotel> globalApiResponse = new GlobalApiResponse<>("Data updated successfully", 200, hotel);
+            return ResponseEntity.ok(globalApiResponse);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(404).body(new GlobalApiResponse<>(e.getMessage(), 404, null));
+        }
     }
-
 }

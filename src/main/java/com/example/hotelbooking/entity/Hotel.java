@@ -21,8 +21,7 @@ public class Hotel {
     @Column(name = "hotelName", nullable = false, length = 100)
     private String hotelName;
 
-    @Column(name = "password", nullable = false, length = 100)
-    private String password;
+
 
     @Column(name = "address", nullable = false, length = 100)
     private String address;

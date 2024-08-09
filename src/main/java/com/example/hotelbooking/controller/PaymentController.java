@@ -7,6 +7,7 @@ import com.example.hotelbooking.pojo.PaymentPojo;
 import com.example.hotelbooking.service.PaymentService;
 import com.example.hotelbooking.shared.pojo.GlobalApiResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,13 +54,21 @@ public class PaymentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<GlobalApiResponse<Payment>>update (@PathVariable PaymentPojo payment){
-        Payment payments = paymentService.update(payment);
+    public ResponseEntity<GlobalApiResponse<Payment>> update(
+            @PathVariable Integer id,
+            @RequestBody PaymentPojo paymentPojo) {
 
-        GlobalApiResponse <Payment> globalApiResponse = new GlobalApiResponse<>("data updated  successfully", 201, null);
+        Payment payment = paymentService.update(id, paymentPojo);
+
+        if (payment == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new GlobalApiResponse<>("Payment not found", 404, null));
+        }
+
+        GlobalApiResponse<Payment> globalApiResponse = new GlobalApiResponse<>("Data updated successfully", 200, payment);
         return ResponseEntity.ok(globalApiResponse);
-
     }
+
 
 
 }

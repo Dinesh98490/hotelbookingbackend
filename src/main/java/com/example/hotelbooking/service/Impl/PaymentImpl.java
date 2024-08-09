@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
 @Service
 @AllArgsConstructor
 public class PaymentImpl implements PaymentService {
@@ -37,6 +36,8 @@ public class PaymentImpl implements PaymentService {
         payment.setAmount(paymentPojo.getAmount());
         payment.setPaymentDate(new Date());
         payment.setPaymentMethod(paymentPojo.getPaymentMethod());
+        payment.setFirstName(paymentPojo.getFirstName()); // Set firstName
+        payment.setLastName(paymentPojo.getLastName());   // Set lastName
 
         Optional<Booking> optionalBooking = bookingRepository.findById(paymentPojo.getBookingId());
         if (optionalBooking.isPresent()) {
@@ -48,13 +49,15 @@ public class PaymentImpl implements PaymentService {
     }
 
     @Override
-    public Payment update( PaymentPojo paymentPojo) {
-        Optional<Payment> optionalPayment = paymentRepository.findById(paymentPojo.getId());
+    public Payment update(Integer id, PaymentPojo paymentPojo) {
+        Optional<Payment> optionalPayment = paymentRepository.findById(id);
         if (optionalPayment.isPresent()) {
             Payment payment = optionalPayment.get();
             payment.setAmount(paymentPojo.getAmount());
             payment.setPaymentDate(new Date());
             payment.setPaymentMethod(paymentPojo.getPaymentMethod());
+            payment.setFirstName(paymentPojo.getFirstName());
+            payment.setLastName(paymentPojo.getLastName());
 
             Optional<Booking> optionalBooking = bookingRepository.findById(paymentPojo.getBookingId());
             if (optionalBooking.isPresent()) {
@@ -66,6 +69,7 @@ public class PaymentImpl implements PaymentService {
         }
         return null;
     }
+
 
     @Override
     public void deleteById(Integer id) {

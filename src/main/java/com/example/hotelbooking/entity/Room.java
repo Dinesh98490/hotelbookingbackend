@@ -30,7 +30,12 @@ public class Room {
     @Column( nullable = false, length = 100)
     private String availabilitystatus;
 
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "hotelid", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_hotel_room"))
     private Hotel hotel;
+
+    public Integer getHotelId() {
+        return hotel.getId();
+    }
 }

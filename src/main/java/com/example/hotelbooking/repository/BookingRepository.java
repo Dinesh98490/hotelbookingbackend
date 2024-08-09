@@ -10,11 +10,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 
+
+// BookingRepository.java
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Integer> {
-
-
-    @Query(value = "select id from booking",nativeQuery = true)
-    List<BookingProj> findAllByProjection();
-
 }
+

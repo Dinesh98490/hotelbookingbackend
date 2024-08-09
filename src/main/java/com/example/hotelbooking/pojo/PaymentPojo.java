@@ -14,6 +14,8 @@ import java.util.Date;
 @AllArgsConstructor
 public class PaymentPojo {
     private Integer id;
+    private String firstName;
+    private String lastName;
 //    private Date paymentDate;
     private String Amount;
     private String paymentMethod;

@@ -13,11 +13,10 @@ import lombok.Setter;
 public class HotelPojo {
     private  Integer hotelId;
     private  String hotelName;
-    private  String password;
     private  String hotelAddress;
     private  String hotelCity;
     private  String hotelEmail;
-    private int  phoneNumber;
+    private String  phoneNumber;
 
 
 
